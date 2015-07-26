@@ -1,0 +1,13 @@
+{
+	"name": 	"bassguitarbot",
+	"version": 	"0.0.1",
+	"description":	"Chatbot for twitch.tv IRC",
+	"author":	"Bill Rossi <bassguitarbill@gmail.com",
+	"repository":	{
+		"type": "git",
+		"url":	"https://github.com/bassguitarbill/bassguitarbot.git"
+	},
+	"dependencies": {
+		"twitch-irc":	"1.2.7"
+	}
+}
