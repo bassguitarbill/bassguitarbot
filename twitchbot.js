@@ -15,8 +15,16 @@ var clientOptions = {
 
 var client = new irc.client(clientOptions);
 
-client.connect();
-
 client.addListener('chat', function(chan, user, msg) {
 	console.log(user.username + ": " + msg);
 });
+
+var bot = {
+	client: client
+};
+
+bot.connect = function() {
+	client.connect();
+}
+
+module.exports = bot;

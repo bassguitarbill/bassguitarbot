@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<title>BassguitarBot Admin Console</title>
+	</head>
+	<body>
+		<input type="text" id="messageField" />
+		<input type="button" id="submitButton" onclick="submit()" value="Submit"></input>
+	</body>
+	<script>
+		function submit(){
+			var msg = document.getElementById('messageField').value;
+			var req = new XMLHttpRequest();
+			req.open('POST', 'api/broadcast', true);
+			req.setRequestHeader('content-type', 'application/json');
+			req.send(JSON.stringify({
+				message: msg
+			}));
+			document.getElementById('messageField').value = "";
+		}
+	</script>
+</html>

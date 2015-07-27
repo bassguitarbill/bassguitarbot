@@ -1,13 +1,25 @@
 {
-	"name": 	"bassguitarbot",
-	"version": 	"0.0.1",
-	"description":	"Chatbot for twitch.tv IRC",
-	"author":	"Bill Rossi <bassguitarbill@gmail.com",
-	"repository":	{
-		"type": "git",
-		"url":	"https://github.com/bassguitarbill/bassguitarbot.git"
-	},
-	"dependencies": {
-		"twitch-irc":	"1.2.7"
-	}
+  "name": "bassguitarbot",
+  "version": "0.0.1",
+  "description": "Chatbot for twitch.tv IRC",
+  "author": "Bill Rossi",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bassguitarbill/bassguitarbot.git"
+  },
+  "dependencies": {
+    "body-parser": "^1.13.2",
+    "express": "^4.0.0",
+    "twitch-irc": "1.2.7"
+  },
+  "bugs": {
+    "url": "https://github.com/bassguitarbill/bassguitarbot/issues"
+  },
+  "homepage": "https://github.com/bassguitarbill/bassguitarbot#readme",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "ISC"
 }
