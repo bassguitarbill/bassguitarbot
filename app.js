@@ -30,8 +30,10 @@ app.get(/\/.*/, function(req, rsp) {
 });
 
 app.post('/api/broadcast', function(req, rsp) {
-	console.log(req.body);
-	bot.client.say('bassguitarbill', req.body.message);
+	for(var i=0; i<bot.client.currentChannels.length; i++){
+		console.log(bot.client.currentChannels[i], req.body.message);
+		bot.client.say(bot.client.currentChannels[i], req.body.message);
+	}
 	rsp.status(200).send();
 }); 
 

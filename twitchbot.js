@@ -1,16 +1,19 @@
 var irc = require('twitch-irc');
 
-var pass = require('./credentials').pass; 
+var credentials = require('./credentials');
+var user = credentials.username;
+var pass = credentials.pass; 
+
+var loadChannelList = require('./load-channel-list');
 
 var clientOptions = {
 	options: {
 		debug: true
 	},
 	identity: {
-		username: 'bassguitarbot',
+		username: user,
 		password: pass
-	},
-	channels: ['bassguitarbill']
+	}
 }
 
 var client = new irc.client(clientOptions);
@@ -24,7 +27,16 @@ var bot = {
 };
 
 bot.connect = function() {
-	client.connect();
+	loadChannelList(function(error, channels) {
+		if(error){
+			console.log('Error loading channel list: %s', error);
+			channels = [];
+		} else {
+			console.log('Loaded channels: %s', channels);
+		}
+		clientOptions.channels = channels;
+		client.connect();
+	});
 }
 
 module.exports = bot;
