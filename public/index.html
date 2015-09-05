@@ -1,21 +1,47 @@
-<html>
+<!DOCTYPE html>
+<html >
 	<head>
-		<title>BassguitarBot Admin Console</title>
+		<meta charset="UTF-8">
+		<title>Bassguitarbot</title>
+		<link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+		<link rel="stylesheet" href="css/animations.css">
+		<link rel="stylesheet" href="css/style.css">
+		<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+		<script src="js/index.js"></script>
 	</head>
+
 	<body>
-		<input type="text" id="messageField" />
-		<input type="button" id="submitButton" onclick="submit()" value="Submit"></input>
+		<div class='header jumbotron'>
+			<div class='container'>
+				<h2>BassguitarBot Admin Console</h2>
+				<p>Administrate your chatbot from this lovely page</p>
+			</div>
+		</div>
+		<div class='row' style='height: 100%'>
+			<div class='container'>
+				<ul class='col-xs-3 channel-list'>
+					<li class='channel selected'>
+						<span>BassguitarBill</span>
+						<div class='marker online'>&nbsp;</div>
+					</li>
+					<li class='channel'>
+						<span>iateyourp1e</span>
+						<div class='marker offline'>&nbsp;</div>
+					</li>
+					<li class='channel'>
+						<span>JYochem94</span>
+						<div class='marker connecting'>&nbsp;</div>
+					</li>
+					<li>
+						<span>Add new...</span>
+						<div class='marker add-new'>+</div>
+					</li>
+				</ul>
+				<div class='col-xs-9' style="height=100%">
+					<textArea class='chat-area' readonly>
+					</textArea>
+				</div>
+			</div>
+		</div>
 	</body>
-	<script>
-		function submit(){
-			var msg = document.getElementById('messageField').value;
-			var req = new XMLHttpRequest();
-			req.open('POST', 'api/broadcast', true);
-			req.setRequestHeader('content-type', 'application/json');
-			req.send(JSON.stringify({
-				message: msg
-			}));
-			document.getElementById('messageField').value = "";
-		}
-	</script>
 </html>

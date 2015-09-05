@@ -1,0 +1,67 @@
+.channel-list > li {
+  display: block;
+  background-color: white;
+  padding: 5px;
+  float: right;
+  border: solid 1px black;
+  border-radius: 4px;
+  overflow: auto;
+  text-align: right;
+}
+
+.channel.selected {
+   background-color: #A7E6E6; 
+}
+
+.channel:hover {
+  background-color: #6AB0B0;
+}
+
+.channel.selected:hover {
+   background-color: #6AB0B0; 
+}
+
+.marker {
+  display: inline-block;
+  width: 24px;
+  margin-left: 5px;
+  border: solid 2px black;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.marker.online {
+  background-color: green;
+}
+
+.marker.offline {
+  background-color: red;
+}
+
+.marker.connecting {
+  background-color: green;
+  animation-name: fade-in-and-out;
+  animation-duration: 1.3s;
+  animation-iteration-count: infinite;
+  opacity: 0;
+}
+
+.marker.add-new {
+  background-color: white;
+  text-align: center;
+  font-weight: bold;
+  -webkit-user-select: none;
+}
+
+.marker.add-new:hover {
+  background-color: #DDD;
+}
+
+.chat-area {
+  width:100%;
+  height:100%; 
+  box-sizing: border-box;         /* For IE and modern versions of Chrome */
+  -moz-box-sizing: border-box;    /* For Firefox                          */
+  -webkit-box-sizing: border-box; /* For Safari                           */
+  resize: none;
+}
