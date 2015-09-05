@@ -6,7 +6,9 @@ var bot = require('./twitchbot');
 var app = express();
 app.use(bodyParser.json());
 
-app.get('/', function(req, rsp, next) {
+
+var publicPath = /web-interface(\/.*)/;
+app.get(publicPath, function(req, rsp, next) {
 	
 	var options = {
 		root: 	__dirname + '/public/',
@@ -15,14 +17,24 @@ app.get('/', function(req, rsp, next) {
 			'x-sent':	true
 		}
 	};
-	rsp.sendFile('index.html', options, function(err) {
+	var relpath = publicPath.exec(req.path)[1];
+	console.log(relpath);
+	relpath = relpath || '/';
+	relpath = relpath == '/' ? '/index.html' : relpath;
+	console.log(relpath);
+	rsp.sendFile(relpath, options, function(err) {
 		if (err) {
 			console.log(err);
 			rsp.status(err.status).send('There be dragons here').end();
 		} else {
-			console.log("Sent index.html");
+			console.log("Sent %s", relpath);
 		}
 	});
+});
+
+app.get('/web-interface', function(req, rsp, next) {
+	rsp.set({'Location': '/web-interface/'});
+	rsp.sendStatus(302);
 });
 
 app.get(/\/.*/, function(req, rsp) {
