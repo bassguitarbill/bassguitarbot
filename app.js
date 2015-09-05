@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express');
 var bodyParser = require('body-parser');
 
@@ -34,20 +36,36 @@ app.get(publicPath, function(req, rsp, next) {
 
 app.get('/web-interface', function(req, rsp, next) {
 	rsp.set({'Location': '/web-interface/'});
-	rsp.sendStatus(302);
+	rsp.sendStatus(301);
 });
+
+app.get('/api/current-channels', function(req, rsp, next) {
+	console.log("something:");
+	rsp.status(200).json({channelList: bot.client.currentChannels});
+});
+
+app.post('/api/broadcast', function(req, rsp) {
+	console.log(req.query);
+	if(req.query && req.query.chan){
+		if(bot.client.currentChannels.indexOf(req.query.chan) > -1){
+			bot.client.say(req.query.chan, req.body.message);
+			rsp.status(200).send();
+		} else {
+			rsp.status(404).send();
+		}
+	} else {
+		for(var i=0; i<bot.client.currentChannels.length; i++){
+			console.log(req.body);
+			console.log(bot.client.currentChannels[i], req.body.message);
+			bot.client.say(bot.client.currentChannels[i], req.body.message);
+		}
+		rsp.status(200).send();
+	}
+}); 
 
 app.get(/\/.*/, function(req, rsp) {
 	rsp.status(404).end('There be dragons here');
 });
-
-app.post('/api/broadcast', function(req, rsp) {
-	for(var i=0; i<bot.client.currentChannels.length; i++){
-		console.log(bot.client.currentChannels[i], req.body.message);
-		bot.client.say(bot.client.currentChannels[i], req.body.message);
-	}
-	rsp.status(200).send();
-}); 
 
 var server = app.listen(8888, function() {
 	var host = server.address().address;
