@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	refreshChannels();
+	setupAddChannel();
 });
 
 function makeChannelsClickable() {
@@ -15,7 +16,6 @@ function selectChannel(ev){
 
 function refreshChannels() {
 	$.getJSON('../api/current-channels', function(data) {
-		console.log(data);
 		var selectedChannel = $('.channel.selected');
 		$('.channel').remove();
 		data.channelList.forEach(function(ch){
@@ -29,4 +29,22 @@ function refreshChannels() {
 	});
 	
 	
+}
+
+function addChannel(channelName) {
+	var chan = channelName || $('.new-channel-name').val();
+	$.post('../api/add-channel?chan=' + chan, null, function(data){
+		console.log(data);
+		$('.new-channel-box').toggleClass('invisible');
+		refreshChannels();
+	}).fail(function(data){
+		console.log(data);
+		$('.new-channel-box').toggleClass('invisible');
+	});
+}
+
+function setupAddChannel() {
+	$('.marker.add-new').click(function(ev){
+		$('.new-channel-box').toggleClass('invisible');
+	});
 }

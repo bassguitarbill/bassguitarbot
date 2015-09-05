@@ -40,8 +40,15 @@ app.get('/web-interface', function(req, rsp, next) {
 });
 
 app.get('/api/current-channels', function(req, rsp, next) {
-	console.log("something:");
+	console.log('refreshing channels...');
 	rsp.status(200).json({channelList: bot.client.currentChannels});
+});
+
+app.post('/api/add-channel', function(req, rsp, next) {
+	console.log(req.query);
+	bot.addChannel(req.query.chan, function(msg) {
+		rsp.status(200).send(msg);
+	});
 });
 
 app.post('/api/broadcast', function(req, rsp) {

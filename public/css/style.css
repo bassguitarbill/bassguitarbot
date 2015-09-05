@@ -65,3 +65,12 @@
   -webkit-box-sizing: border-box; /* For Safari                           */
   resize: none;
 }
+
+.new-channel-box {
+	position: fixed;
+	border: dotted 2px black;
+}
+
+.invisible {
+	display: none;
+}

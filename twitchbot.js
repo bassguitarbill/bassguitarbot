@@ -39,4 +39,21 @@ bot.connect = function() {
 	});
 }
 
+bot.addChannel = function(channelName, callback) {
+	/*
+		This should do some checking to make sure the channel is a real channel. Maybe
+		by using the Twitch API? Anyway for now, don't check.
+	*/
+	console.log('trying to add', channelName);
+	console.log("to", client);
+	
+	if(clientOptions.channels.indexOf(channelName) > -1){
+		callback('duplicate');
+	} else {
+		console.log('added', channelName);
+		bot.client.clientOptions.channels.push(channelName);
+		callback('success');
+	}
+}
+
 module.exports = bot;

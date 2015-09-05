@@ -20,20 +20,12 @@
 		<div class='row' style='height: 100%'>
 			<div class='container'>
 				<ul class='col-xs-3 channel-list'>
-					<li class='channel selected'>
-						<span>BassguitarBill</span>
-						<div class='marker online'>&nbsp;</div>
-					</li>
-					<li class='channel'>
-						<span>iateyourp1e</span>
-						<div class='marker offline'>&nbsp;</div>
-					</li>
-					<li class='channel'>
-						<span>JYochem94</span>
-						<div class='marker connecting'>&nbsp;</div>
-					</li>
 					<li>
-						<span>Add new...</span>
+					<span>Add new...</span>
+						<div class='new-channel-box invisible'>
+							<textarea class='new-channel-name'></textarea>
+							<input type='button' onclick='addChannel()' value='Add'></input>
+						</div>
 						<div class='marker add-new'>+</div>
 					</li>
 				</ul>
@@ -49,7 +41,7 @@
 			function submit(){
 				var msg = document.getElementById('messageField').value;
 				var req = new XMLHttpRequest();
-				req.open('POST', '../api/broadcast?chan=bestofnes', true);
+				req.open('POST', '../api/broadcast?chan=nobody', true);
 				req.setRequestHeader('content-type', 'application/json');
 				req.send(JSON.stringify({
 					message: msg
