@@ -63,7 +63,7 @@ app.post('/api/connect-channel', function(req, rsp, next) {
 	});
 });
 
-app.post('/api/broadcast', function(req, rsp) {
+app.post('/api/chat', function(req, rsp) {
 	console.log(req.query);
 	if(req.query && req.query.chan){
 		var chan = "#" + req.query.chan.toLowerCase();

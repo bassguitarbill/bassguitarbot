@@ -42,7 +42,7 @@
 				var msg = document.getElementById('messageField').value;
 				var req = new XMLHttpRequest();
 				var chan = $('.selected>span').text();
-				req.open('POST', '../api/broadcast?chan=' + chan, true);
+				req.open('POST', '../api/chat?chan=' + chan, true);
 				req.setRequestHeader('content-type', 'application/json');
 				req.send(JSON.stringify({
 					message: msg
