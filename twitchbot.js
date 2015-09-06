@@ -2,9 +2,13 @@ var irc = require('tmi.js');
 
 var credentials = require('./credentials');
 var user = credentials.username;
-var pass = credentials.pass; 
+var pass = credentials.pass;
+
+var botName = user; 
 
 var loadChannelList = require('./load-channel-list');
+
+var listeners = require('./listeners');
 
 var clientOptions = {
 	options: {
@@ -19,7 +23,15 @@ var clientOptions = {
 var client = new irc.client(clientOptions);
 
 client.addListener('chat', function(chan, user, msg) {
-	//console.log(user.username + ": " + msg);
+	// The bot should not respond to itself.
+	if(user.username.toLowerCase() == botName)
+		return;
+		
+	for(l in listeners){
+		if(listeners[l].regex.test(msg)){
+			bot.client.say(chan, listeners[l].response(chan, user, msg));
+		}
+	}
 });
 
 var bot = {
