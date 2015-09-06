@@ -10,7 +10,7 @@
   "dependencies": {
     "body-parser": "^1.13.2",
     "express": "^4.0.0",
-    "twitch-irc": "1.2.7"
+    "tmi.js": "0.0.22"
   },
   "bugs": {
     "url": "https://github.com/bassguitarbill/bassguitarbot/issues"

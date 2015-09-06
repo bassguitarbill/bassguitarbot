@@ -40,8 +40,13 @@ app.get('/web-interface', function(req, rsp, next) {
 });
 
 app.get('/api/current-channels', function(req, rsp, next) {
-	console.log('refreshing channels...');
-	rsp.status(200).json({channelList: bot.client.currentChannels});
+	console.log('refreshing channels...' + bot.channels);
+	rsp.status(200).json({channelList: bot.channels});
+});
+
+app.get('/api/connected-channels', function(req, rsp, next) {
+	console.log('refreshing connected channels...' + bot.client.channels.map(function(ch){return ch.slice(1)}));
+	rsp.status(200).json({channelList: bot.client.channels.map(function(ch){return ch.slice(1)})}); // remove leading '#'
 });
 
 app.post('/api/add-channel', function(req, rsp, next) {
@@ -51,20 +56,28 @@ app.post('/api/add-channel', function(req, rsp, next) {
 	});
 });
 
+app.post('/api/connect-channel', function(req, rsp, next) {
+	console.log(req.query);
+	bot.connectToChannel(req.query.chan, function(msg) {
+		rsp.status(200).send(msg);
+	});
+});
+
 app.post('/api/broadcast', function(req, rsp) {
 	console.log(req.query);
 	if(req.query && req.query.chan){
-		if(bot.client.currentChannels.indexOf(req.query.chan) > -1){
-			bot.client.say(req.query.chan, req.body.message);
+		var chan = "#" + req.query.chan.toLowerCase();
+		if(bot.client.channels.indexOf(chan) > -1){
+			bot.client.say(chan, req.body.message);
 			rsp.status(200).send();
 		} else {
 			rsp.status(404).send();
 		}
 	} else {
-		for(var i=0; i<bot.client.currentChannels.length; i++){
+		for(var i=0; i<bot.client.channels.length; i++){
 			console.log(req.body);
-			console.log(bot.client.currentChannels[i], req.body.message);
-			bot.client.say(bot.client.currentChannels[i], req.body.message);
+			console.log(bot.client.channels[i], req.body.message);
+			bot.client.say(bot.client.channels[i], req.body.message);
 		}
 		rsp.status(200).send();
 	}
