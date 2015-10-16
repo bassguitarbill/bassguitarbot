@@ -12,6 +12,13 @@ var lines = {
 			"-SHARPEN THY SHOVEL-",
 			"-FOR SHOVELRY-"
 		]
+	},
+	"smrpg": {
+		"leftRightMid": [
+			"TEAM LEFT",
+			"TEAM MID",
+			"TEAM RIGHT"
+		]
 	}
 }
 
@@ -24,7 +31,18 @@ var listeners = {
 			var i = Math.floor(Math.random() * this.quotes.length);
 			return this.quotes[i];
 		}
+	},
+	smrpg: {
+		regex: /^!smrpg$/,
+		quotes: lines.smrpg.leftRightMid,
+		response: function(chan, user, msg) {
+			if(user.username != "bassguitarbill")
+				return "";
+			var i = Math.floor(Math.random() * this.quotes.length);
+			return this.quotes[i];
+		}
 	}
+		
 };
 
 

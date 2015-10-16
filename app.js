@@ -45,8 +45,10 @@ app.get('/api/current-channels', function(req, rsp, next) {
 });
 
 app.get('/api/connected-channels', function(req, rsp, next) {
-	console.log('refreshing connected channels...' + bot.client.channels.map(function(ch){return ch.slice(1)}));
-	rsp.status(200).json({channelList: bot.client.channels.map(function(ch){return ch.slice(1)})}); // remove leading '#'
+	// remove leading '#'
+	var channelsSansHash = bot.client.channels.map(function(ch){return ch.slice(1)});
+	console.log('refreshing connected channels...' + channelsSansHash);
+	rsp.status(200).json({channelList: channelsSansHash});
 });
 
 app.post('/api/add-channel', function(req, rsp, next) {
