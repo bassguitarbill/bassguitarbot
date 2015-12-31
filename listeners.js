@@ -19,6 +19,9 @@ var lines = {
 			"TEAM MID",
 			"TEAM RIGHT"
 		]
+	},
+	"bcas": {
+		"owns": "ｂｃａｓ ｏｗｎｓ"
 	}
 }
 
@@ -33,13 +36,20 @@ var listeners = {
 		}
 	},
 	smrpg: {
-		regex: /^!smrpg$/,
+		regex: /^!smrpg$/i,
 		quotes: lines.smrpg.leftRightMid,
 		response: function(chan, user, msg) {
 			if(user.username != "bassguitarbill")
 				return "";
 			var i = Math.floor(Math.random() * this.quotes.length);
 			return this.quotes[i];
+		}
+	},
+	bcas: {
+		regex: /^bcas owns$/i,
+		quotes: [lines.bcas.owns],
+		response: function(chan, user, msg) {
+			return this.quotes[0];
 		}
 	}
 		

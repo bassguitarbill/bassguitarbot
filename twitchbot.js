@@ -10,6 +10,8 @@ var loadChannelList = require('./load-channel-list');
 
 var listeners = require('./listeners');
 
+var DelayQueue = require('./message-queue').DelayQueue;
+
 var clientOptions = {
 	options: {
 		debug: true
@@ -29,13 +31,22 @@ client.addListener('chat', function(chan, user, msg) {
 		
 	for(l in listeners){
 		if(listeners[l].regex.test(msg)){
-			bot.client.say(chan, listeners[l].response(chan, user, msg));
+			//bot.client.say(chan, listeners[l].response(chan, user, msg));
+			var response = listeners[l].response(chan, user, msg);
+			bot.messageQueue.addMessage([bot.client, chan, response]);
 		}
 	}
 });
 
+function dequeueMessage(rsp) {
+	//var [say, chan, responseMsg] = rsp;
+	//say(chan, responseMsg);
+	rsp[0].say(rsp[1], rsp[2]);
+}
+
 var bot = {
-	client: client
+	client: client,
+	messageQueue: new DelayQueue(dequeueMessage)
 };
 
 bot.connect = function() {

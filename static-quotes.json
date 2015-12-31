@@ -12,5 +12,39 @@
 			"-SHARPEN THY SHOVEL-",
 			"-FOR SHOVELRY-"
 		]
+	},
+	
+	"earthbound": {
+		
+		"quotes": [
+			"Didactically speaking, seminal evidence seems to explicate the fact that your repudiation of entropy supports my theory of space-time synthesis. Of this, I am irrefutably confident.",
+			"I have fake teeth, so I like soft foods. Not like rocks or stones. They're too hard.",
+			"Oh! Good evening ma'am. You're looking lovely as usual. *snicker* ",
+			"Aaiiiieeeeee! I screamed...'cause I didn't know what else to do!",
+			"Are you a friend of Master Pokey? It's okay to visit him here, but don't wander around the building. Someone might be suspicious of you and take a pot shot at you with a machine gun...",
+			"Before the soup gets cold, we must care for Mani Mani. Before the knife gets rusty, we must care for Mani Mani.",
+			"There is no way I can beat you in a straight competition, so... get ready for my \"Super Ultra Mambo-Tango-Foxtrot martial arts!\"",
+			"Hello! And... good-bye!",
+			"Gwaaagh, Gwarrrgh!. You finally made it. This department store is gonna be your grave! Gwaaagh. You will be gone, and you'll be burning in... Well, you'll go to heaven!",
+			"I can become "Dungeon Man," the first combination of human and dungeon in history.",
+			"Spit spit spit Saliva spit spit Do you want some gum? Get yer own, twit.",
+			"For someone as great as you, giving you the key could help keep the town peaceful. However, if you encounter a dangerous situation, please don't ask me to take any responsibility. I'll be able to avoid any responsibility, right?",
+			"Wahhaha! Why don't we chat later-after we've locked horns!",
+			"Money, that's what I want money, that's what is hot money, that's what I want money, it's what we ain't got 'cept freedom, freedom, freedom is what we've really sought!",
+			"Cows and carrots?... That's a nutty combination!",
+			"They said someone named Pokey stole all the food from the food stand."
+		],
+		"level-up": {
+			"base": "$stat; went up by $value;!",
+			"modifiers":[
+				"Oh, baby!",
+				"That rocks!",
+				"Sweet!"
+			]
+		}
+	},
+	
+	"bcas": {
+		"owns": "ｂｃａｓ ｏｗｎｓ"
 	}
 }
