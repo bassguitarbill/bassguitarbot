@@ -31,10 +31,13 @@ client.addListener('chat', function(chan, user, msg) {
 		
 	for(l in listeners){
 		if(listeners[l].regex.test(msg)){
+                    var chanWithoutHash = chan.substring(1)
+                    if(!listeners[l].modonly || (user.mod || user.username == chanWithoutHash)){
 			//bot.client.say(chan, listeners[l].response(chan, user, msg));
-			var response = listeners[l].response(chan, user, msg);
-			bot.messageQueue.addMessage([bot.client, chan, response]);
-		}
+			//var response = listeners[l].response(chan, user, msg);
+			listeners[l].response(chanWithoutHash, user, msg, response => {bot.messageQueue.addMessage([bot.client, chan, response])})
+		    }
+                }
 	}
 });
 
