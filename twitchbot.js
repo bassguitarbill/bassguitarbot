@@ -49,10 +49,12 @@ function dequeueMessage(rsp) {
 
 var bot = {
     client: client,
-    messageQueue: new DelayQueue(dequeueMessage)
+    messageQueue: new DelayQueue(dequeueMessage),
+    channels: []
 };
 
-bot.connect = function() {
+function loadChannels() {
+
     loadChannelList(function(error, channels) {
         if(error){
             console.log('Error loading channel list: %s', error);
@@ -63,8 +65,13 @@ bot.connect = function() {
         bot.channels = channels;
         clientOptions.channels = channels;
         connectingChannels = channels.map(function(ch){return {channelName: ch, callback: function(){}}});
-        client.connect();
     });
+}
+
+loadChannels()
+
+bot.connect = function() {
+    client.connect();
 }
 
 bot.disconnect = function() {
