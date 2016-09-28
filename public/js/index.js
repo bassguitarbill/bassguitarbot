@@ -17,7 +17,8 @@ function refreshChannels() {
         console.log(data);
         var selectedChannel = $('.channel.selected');
         $('.channel').remove();
-        console.log(data.channelList)
+        data.channelList = data.channelList ? data.channelList : []
+        console.log(data);
         data.channelList.forEach(function(ch){
             var channel = $(document.createElement('li'))
                 .addClass('channel')

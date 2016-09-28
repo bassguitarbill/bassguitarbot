@@ -67,6 +67,14 @@ bot.connect = function() {
     });
 }
 
+bot.disconnect = function() {
+    client.disconnect();
+}
+
+bot.connected = function() {
+    return client.readyState()
+}
+
 bot.addChannel = function(channelName, callback) {
     /*
                 This should do some checking to make sure the channel is a real channel. Maybe

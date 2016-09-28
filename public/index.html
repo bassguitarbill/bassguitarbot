@@ -36,6 +36,10 @@
 				<input type="text" id="messageField" />
 				<input type="button" id="submitButton" onclick="submit()" value="Submit"></input>
 			</div>
+                        <div class="container">
+                            <input type="button" onclick="connect()" value="Connect"></input>
+                            <input type="button" onclick="disconnect()" value="Disonnect"></input>
+                        </div>
 		</div>
 		<script>
 			function submit(){
@@ -49,6 +53,12 @@
 				}));
 				document.getElementById('messageField').value = "";
 			}
+                        function connect() {
+                            $.post("../api/connect")
+                        }
+                        function disconnect() {
+                            $.post("../api/disconnect")
+                        }
 		</script>
 	</body>
 </html>

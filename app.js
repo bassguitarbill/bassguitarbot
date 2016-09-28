@@ -82,6 +82,22 @@ app.post('/api/chat', function(req, rsp) {
     }
 }); 
 
+app.post("/api/connect", function(req, rsp) {
+    if(bot.connected != "CLOSED")
+        bot.connect()
+    rsp.status(200).send();
+})
+
+app.post("/api/disconnect", function(req, rsp) {
+    if(bot.connected != "OPEN")
+        bot.disconnect()
+    rsp.status(200).send()
+})
+
+app.get("/api/is-connected", function(req, rsp) {
+    rsp.status(200).send(bot.connected())
+})
+
 app.get(/\/.*/, function(req, rsp) {
     rsp.status(404).end('There be dragons here');
 });
@@ -91,5 +107,4 @@ var server = app.listen(8888, function() {
     var port = server.address().port;
 
     console.log('Listening at http://%s:%s', host, port);
-    bot.connect();
 });
