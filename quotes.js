@@ -2,20 +2,19 @@ const fs = require('fs');
 
 
 function hasQuotesPage(channelName, callback) {
-    fs.stat('quotes/' + channelName.toLowerCase(), (err, stat) => {callback(!!stat)})        
+    fs.stat(getQuoteFilePath(channelName), (err, stat) => {callback(!!stat)})        
 }
 
 function getQuotes(channelName, callback) {
     hasQuotesPage(channelName, exists => {
-        console.log('WE IN THEEEEEERE', channelName.toLowerCase(), exists)
         if(exists) {
-            fs.readFile('quotes/' + channelName.toLowerCase(), {encoding: "UTF-8"}, (err, data) => {
+            fs.readFile(getQuoteFilePath(channelName), {encoding: "UTF-8"}, (err, data) => {
                 if(err) throw err
                 console.log(data)
                 callback(data.split("\n").filter(line => !!line))
             })
         } else {
-            fs.writeFile('quotes/' + channelName.toLowerCase(), "\n", err => {
+            fs.writeFile(getQuoteFilePath(channelName), "\n", err => {
                 if (err) throw err
                 callback([""])
             })
@@ -31,10 +30,14 @@ function getRandomQuote(channelName, callback) {
 }
 
 function addQuote(channelName, quote, callback) {
-    fs.appendFile('quotes/' + channelName.toLowerCase(), quote + "\n", err => {
+    fs.appendFile(getQuoteFilePath(channelName), quote + "\n", err => {
         if(err) console.log(err);
         callback(err ? "Couldn't add quote" : "Successfully added quote")
     })
+}
+
+function getQuoteFilePath(chan) {
+    return 'channels/' + chan.toLowerCase() + '/quotes' 
 }
 
 module.exports = {

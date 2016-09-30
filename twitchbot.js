@@ -6,7 +6,7 @@ var pass = credentials.pass;
 
 var botName = user; 
 
-var loadChannelList = require('./load-channel-list');
+var loadChannelList = require('./channel-list');
 
 var listeners = require('./listeners');
 

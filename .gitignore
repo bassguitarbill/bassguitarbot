@@ -1,6 +1,6 @@
 credentials.js
 node_modules
 *.swp
-channels
+channels/*
 notepad-session
 quotes/*
