@@ -83,19 +83,25 @@ app.post('/api/chat', function(req, rsp) {
 }); 
 
 app.post("/api/connect", function(req, rsp) {
-    if(bot.connected != "CLOSED")
+	console.log("connecting - status = " + bot.connected());
+    if(bot.connected() == "CLOSED")
         bot.connect()
     rsp.status(200).send();
 })
 
 app.post("/api/disconnect", function(req, rsp) {
-    if(bot.connected != "OPEN")
+	console.log("disconnecting - status = " + bot.connected());
+    if(bot.connected() == "OPEN")
         bot.disconnect()
     rsp.status(200).send()
 })
 
 app.get("/api/is-connected", function(req, rsp) {
     rsp.status(200).send(bot.connected())
+})
+
+app.get("/api/get-username", function(req, rsp) {
+    rsp.status(200).send(bot.getUsername())
 })
 
 app.get(/\/.*/, function(req, rsp) {

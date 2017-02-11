@@ -10,7 +10,7 @@
   "dependencies": {
     "body-parser": "^1.13.2",
     "express": "^4.0.0",
-    "tmi.js": "^1.1.1"
+    "tmi.js": "^1.1.2"
   },
   "bugs": {
     "url": "https://github.com/bassguitarbill/bassguitarbot/issues"

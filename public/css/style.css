@@ -66,6 +66,10 @@
   resize: none;
 }
 
+.bot-info {
+  margin: 30px;
+}
+
 .new-channel-box {
 	position: fixed;
 	border: dotted 2px black;

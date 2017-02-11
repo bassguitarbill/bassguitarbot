@@ -1,6 +1,8 @@
 $(document).ready(function(){
     refreshChannels();
     setupAddChannel();
+    refreshBotStatus();
+    window.setInterval(refreshBotStatus, 1000);
 });
 
 function makeChannelsClickable() {
@@ -63,18 +65,25 @@ function addChannel(channelName) {
 function setupAddChannel() {
     $('.marker.add-new').click(function(ev){
         $('.new-channel-box').toggleClass('invisible');
+	$('.new-channel-name').focus();
     });
 }
 
 function connectChannel(channelName) {
-    $('#marker-' + channelName).removeClass('offline').addClass('connecting');
-    $.post('../api/connect-channel?chan=' + channelName, null, function(data){
-        $('#marker-' + channelName).removeClass('connecting').addClass('online');
-        console.log(data);
-        refreshChannels();
-    }).fail(function(data){
-        console.log(data);
-    });
+    $.get("../api/is-connected", function(status) {
+	if(status == "OPEN") {
+    	    $('#marker-' + channelName).removeClass('offline').addClass('connecting');
+	    $.post('../api/connect-channel?chan=' + channelName, null, function(data){
+	        $('#marker-' + channelName).removeClass('connecting').addClass('online');
+	        console.log(data);
+	        refreshChannels();
+	    }).fail(function(data){
+	        console.log(data);
+	    });
+	} else {
+	    console.log("Can't connect to " + channelName + ", bot is " + status)
+	}
+    })
 }
 
 var markerRegex = /marker-(.*)/
@@ -89,4 +98,29 @@ var markerRegex = /marker-(.*)/
 
 function setupConnectChannels() {
     $('.channel>.marker').click(clickMarker);
+}
+
+function submit(){
+    var msg = document.getElementById('messageField').value;
+    var req = new XMLHttpRequest();
+    var chan = $('.selected>span').text();
+    req.open('POST', '../api/chat?chan=' + chan, true);
+    req.setRequestHeader('content-type', 'application/json');
+    req.send(JSON.stringify({
+    	message: msg
+    }));
+    document.getElementById('messageField').value = "";
+}
+
+function connect() {
+	$.post("../api/connect", data => refreshBotStatus())
+}
+
+function disconnect() {
+	$.post("../api/disconnect", data => refreshBotStatus())
+}
+
+function refreshBotStatus() {
+	$.get("../api/is-connected", status => $('.bot-status').text(status));
+	$.get("../api/get-username", username => $('.bot-name').text(username));
 }

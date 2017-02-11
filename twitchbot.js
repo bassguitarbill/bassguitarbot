@@ -121,4 +121,8 @@ bot.connectToChannel = function(chan, callback) {
 
 }
 
+bot.getUsername = function() {
+    return client.getUsername()
+}
+
 module.exports = bot;

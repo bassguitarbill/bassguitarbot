@@ -17,6 +17,22 @@
 				<p>Administrate your chatbot from this lovely page</p>
 			</div>
 		</div>
+		<div class='row bot-info'>
+			<div class='container'>
+			<div class='bot-name-panel'>
+				<span class='bot-name-label'>Bot username: </span>
+				<span class='bot-name'></span>
+			</div>
+			<div class='bot-status-panel'>
+				<span class='bot-status-label'>Bot status: </span>
+				<span class='bot-status'></span>
+			</div>
+			<div class='connect-and-disconnect-buttons'>
+			<input type="button" onclick="connect()" value="Connect"></input>
+                            <input type="button" onclick="disconnect()" value="Disconnect"></input>
+			</div>
+			</div>
+		</div>
 		<div class='row' style='height: 100%'>
 			<div class='container'>
 				<ul class='col-xs-3 channel-list'>
@@ -31,34 +47,10 @@
 				</ul>
 				<div class='col-xs-9' style="height=100%">
 					<textArea class='chat-area' readonly>
-					</textArea>
-				</div>
-				<input type="text" id="messageField" />
+					</textArea><input type="text" id="messageField" />
 				<input type="button" id="submitButton" onclick="submit()" value="Submit"></input>
+				</div>
 			</div>
-                        <div class="container">
-                            <input type="button" onclick="connect()" value="Connect"></input>
-                            <input type="button" onclick="disconnect()" value="Disonnect"></input>
-                        </div>
 		</div>
-		<script>
-			function submit(){
-				var msg = document.getElementById('messageField').value;
-				var req = new XMLHttpRequest();
-				var chan = $('.selected>span').text();
-				req.open('POST', '../api/chat?chan=' + chan, true);
-				req.setRequestHeader('content-type', 'application/json');
-				req.send(JSON.stringify({
-					message: msg
-				}));
-				document.getElementById('messageField').value = "";
-			}
-                        function connect() {
-                            $.post("../api/connect")
-                        }
-                        function disconnect() {
-                            $.post("../api/disconnect")
-                        }
-		</script>
 	</body>
 </html>
