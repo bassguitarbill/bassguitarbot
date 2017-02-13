@@ -23,6 +23,23 @@ function getChannels (callback) {
     })
 }
 
-module.exports = getChannels
+function addChannel(channelName, callback) {
+	getChannels((err, channelNames) => {
+		if(err) {
+			callback(err);
+		} else if(channelNames.includes(channelName)) {
+			callback(null, channelNames);
+		} else {
+			fs.mkdir(channelsPath + "/" + channelName.toLowerCase(), () => {
+				getChannels(callback);
+			});
+		}
+	});
+}
+
+module.exports = {
+	getChannels:getChannels,
+	addChannel:addChannel
+}
 
 

@@ -6,7 +6,9 @@ var pass = credentials.pass;
 
 var botName = user; 
 
-var loadChannelList = require('./channel-list');
+var channelList = require('./channel-list');
+var loadChannelList = channelList.getChannels;
+var addChannelToList = channelList.addChannel;
 
 var listeners = require('./listeners');
 
@@ -94,7 +96,9 @@ bot.addChannel = function(channelName, callback) {
     } else {
         console.log('added', channelName);
         bot.channels.push(channelName);
-        callback('success');
+	addChannelToList(channelName, (err, names) => {
+            callback(err || 'success');
+	});
     }
 }
 
