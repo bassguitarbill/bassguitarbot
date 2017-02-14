@@ -8,6 +8,7 @@ var bot = require('./twitchbot');
 var app = express();
 app.use(bodyParser.json());
 
+var plugins = require('./plugins');
 
 var publicPath = /web-interface(\/.*)/;
 app.get(publicPath, function(req, rsp, next) {
@@ -103,6 +104,12 @@ app.get("/api/is-connected", function(req, rsp) {
 app.get("/api/get-username", function(req, rsp) {
     rsp.status(200).send(bot.getUsername())
 })
+
+app.get("/api/plugins/names", function(req, rsp) {
+    plugins.getPluginNames((err, nameList) => {
+	rsp.status(err ? 500 : 200).send(err || nameList);
+    });
+})	
 
 app.get(/\/.*/, function(req, rsp) {
     rsp.status(404).end('There be dragons here');

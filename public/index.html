@@ -46,8 +46,28 @@
 					</li>
 				</ul>
 				<div class='col-xs-9' style="height=100%">
-					<textArea class='chat-area' readonly>
-					</textArea><input type="text" id="messageField" />
+				<!--	<textArea class='chat-area' readonly>
+				</textArea> -->
+				<div id='plugin-div'>
+					<div id='plugin-select'>
+						<select name='pluginSelect'>
+							<option value='Plugin Name'>Plugin Name</option>
+							<option value='Mighty Shouter'>Mighty Shouter</option>
+						</select>
+						<input type='submit' id='new-instance-button' value='+'></input>
+					</div>
+					<div id='plugin-pane'>
+						<div id='plugin-properties'>
+							<span class='instance-name'>Plugin Name</span>
+							<span class='plugin-name'>QuoteMangler</span>
+							<button class='button-datasource'>DS</button>
+							<button class='button-copy'>C</button>
+							<button class='button-delete red'>D</button>
+						</div>
+						<div id='plugin-ui'></div>
+					</div>
+				</div>
+				<input type="text" id="messageField" />
 				<input type="button" id="submitButton" onclick="submit()" value="Submit"></input>
 				</div>
 			</div>
