@@ -1,0 +1,12 @@
+A plugin is a standalone piece of added functionality that can be added to a single channel in the bot, or the bot at large.
+
+A plugin consists of:
+ A .js file containing server-side functionality of the plugin
+ A spec file containing markup of some kind to describe the plugin's UI and data mapping
+
+An instance of a plugin belongs to a single channel and has its own data. More than one instance of the same plugin can be run in the same channel. 
+Each instance of a plugin will have:
+ An entry in the channel's package manifest file, located in 'channels/%CHANNEL%/plugins/plugin-manifest.json'
+ (Optional) One or more data files to store plugin data in the filesystem, in 'channels/%CHANNEL%/plugins/%INSTANCE%/'
+
+Plugins will communicate with the UI through a data mapping. UI elements can contain a data-mapping attribute which will correspond to information in the plugin data sources.

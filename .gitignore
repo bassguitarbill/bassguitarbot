@@ -3,4 +3,4 @@ node_modules
 *.swp
 channels/*
 notepad-session
-quotes/*
+plugins/*

@@ -1,0 +1,24 @@
+{
+	"plugin-instances": [
+		{
+			"name":"Plugin Instance",
+			"type":"examplePlugin",
+			"data": {
+				"datasourceA":{
+					"type":"fs",
+					"path":"data-a.yaml"
+				},
+				"datasourceB":{
+					"type":"mongo",
+					"path":"bot.users.b"
+				}
+			}
+		},
+		{
+			"name":"Simple Plugin",
+			"type":"verySimplePluginIndeed",
+			"data": {}
+		}
+	]
+}
+			
