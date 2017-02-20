@@ -11,8 +11,17 @@ function getPluginNames(callback) {
 }
 
 function getPluginManifest(chan, callback) {
-    fs.readFile(chanPath + '/' + chan + '/' + pluginManifest, 'utf8', (err, data) => {
-	if(err) {
+    var path = chanPath + '/' + chan + '/' + pluginManifest
+    fs.readFile(path, 'utf8', (err, data) => {
+	if(err && err.code == "ENOENT") {
+	    fs.writeFile(path, "{\"plugin-instances\":[]}", err => {
+		if(err) {
+		    callback(err)
+	    	} else {
+		    callback(null,[])
+	    	}
+	    })
+	} else if (err) {
 	    callback(err)
 	} else {
 	    var mf = JSON.parse(data)
