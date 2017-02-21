@@ -11,6 +11,7 @@ var loadChannelList = channelList.getChannels;
 var addChannelToList = channelList.addChannel;
 
 var listeners = require('./listeners');
+var plugins = require('./plugins');
 
 var DelayQueue = require('./message-queue').DelayQueue;
 
@@ -31,6 +32,7 @@ client.addListener('chat', function(chan, user, msg) {
     if(user.username.toLowerCase() == botName)
         return;
 
+    
     for(l in listeners){
         if(listeners[l].regex.test(msg)){
             var chanWithoutHash = chan.substring(1)

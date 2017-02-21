@@ -18,6 +18,7 @@ function getPluginManifest(chan, callback) {
 		if(err) {
 		    callback(err)
 	    	} else {
+		    console.log("Successfully generated manifest for " + chan)
 		    callback(null,[])
 	    	}
 	    })
